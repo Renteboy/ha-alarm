@@ -14,7 +14,7 @@
 
 <p>zigbee2mqtt installed</p>
 
-<p>Activation of alarm control panel in HA</p>
+<h3>Activation of alarm control panel in HA</h3>
 
 Add the following code to your configuration.yaml (/config/configuration.yaml):
 
