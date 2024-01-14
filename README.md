@@ -18,6 +18,8 @@
 
 Add the following code to your configuration.yaml (/config/configuration.yaml):
 
+<pre>
+<code>
 alarm_control_panel:
   - platform: manual
     name: Home Alarm
@@ -32,8 +34,12 @@ alarm_control_panel:
     armed_home:
       arming_time: 0
       delay_time: 0
+</code>
+</pre>
 
-Don't forget to change the code from "1234" to your custom code to disarm the system.
+
+<p>Don't forget to change the code from "1234" to your custom code to disarm the system.</p>
+
 
 <h3>Behaviour</h3>
 
