@@ -12,7 +12,28 @@
 
 <h3>Requirement</h3>
 
-<p>zigbee2mqtt</p>
+<p>zigbee2mqtt installed</p>
+
+<p>Activation of alarm control panel in HA</p>
+
+Add the following code to your configuration.yaml (/config/configuration.yaml):
+
+alarm_control_panel:
+  - platform: manual
+    name: Home Alarm
+    code: "1234"
+    code_arm_required: false
+    arming_time: 30
+    delay_time: 20
+    trigger_time: 4
+    disarm_after_trigger: false
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      arming_time: 0
+      delay_time: 0
+
+Don't forget to change the code from "1234" to your custom code to disarm the system.
 
 <h3>Behaviour</h3>
 
