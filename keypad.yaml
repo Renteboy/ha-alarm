@@ -3,9 +3,9 @@
 
 blueprint:
     name: Alarm Keypad (Frient/Develco KEPZB-110)
-    description: Alarm and dooropener 
+    description: Adds support for Frient/Develco KEPZB-110 key pad. 
     domain: automation
-    author: Renteboy
+    author: crijun
   
     input:
       z2m_keypad_path:
@@ -24,14 +24,11 @@ blueprint:
             - alarm_control_panel
             multiple: false
       pin:
-        name: Pincode to disarm Alarm
+        name: Pincode to disarm
         description: 'Pin code to disarm the alarm system'
       pin_silent_alarm:
-        name: Pincode to open door
+        name: Silent Alarm Pin
         description: 'Disarms the home alarm system but custom action can be performed'
-      rfid1:
-        name: RFID to open door
-        description: 'RFID to open the door by user #1'
       action_silent_alarm:
         name: Silent Alarm Action
         description: An action to be performed the silent alarm pin is entered instead of the normal pin
@@ -49,7 +46,6 @@ blueprint:
 variables:
   pin_var: !input pin
   pin_silent_alarm_var: !input pin_silent_alarm
-  rfid1_var: !input rfid1
 
 trigger:
 - platform: mqtt
@@ -123,13 +119,6 @@ action:
     - choose:
       - conditions:
         - condition: template
-          value_template: '{{ trigger.payload_json.action_transaction != null and trigger.payload_json.action_code == rfid1_var }}'
-        sequence:
-        - choose:
-          default: !input rfid1
-    - choose:
-      - conditions:
-        - condition: template
           value_template: '{{ trigger.payload_json.action == "arm_all_zones" }}'
         - condition: or
           conditions:
@@ -157,10 +146,10 @@ action:
           value_template: '{{ trigger.payload_json.action == "arm_day_zones" }}'
         - condition: or
           conditions:
-          - condition: template
+          - condition: state
             entity_id: alarm_control_panel.home_alarm
             state: disarmed
-          - condition: template
+          - condition: state
             entity_id: alarm_control_panel.home_alarm
             state: armed_night
         sequence:
