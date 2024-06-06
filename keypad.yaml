@@ -49,7 +49,7 @@ blueprint:
 variables:
   pin_var: !input pin
   pin_silent_alarm_var: !input pin_silent_alarm
-  rfid1: !input rfid1
+  rfid1_var: !input rfid1
 
 trigger:
 - platform: mqtt
@@ -117,12 +117,16 @@ action:
       - conditions:
         - condition: template
           value_template: '{{ trigger.payload_json.action_transaction != null and trigger.payload_json.action_code == pin_silent_alarm_var }}'
-        - condition: or
-          conditions:
-          - condition: state
-            entity_id: !input action_silent_alarm
-          - condition: state
-            entity_id: !input rfid1
+        sequence:
+        - choose:
+          default: !input action_silent_alarm
+    - choose:
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.payload_json.action_transaction != null and trigger.payload_json.action_code == rfid1_var }}'
+        sequence:
+        - choose:
+          default: !input rfid1
     - choose:
       - conditions:
         - condition: template
