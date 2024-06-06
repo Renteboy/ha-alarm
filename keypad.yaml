@@ -117,11 +117,12 @@ action:
       - conditions:
         - condition: template
           value_template: '{{ trigger.payload_json.action_transaction != null and trigger.payload_json.action_code == pin_silent_alarm_var }}'
-        sequence:
-        - choose:
-          default: !input action_silent_alarm
-        - choose:
-          default: !input rfid1
+        - condition: or
+          conditions:
+          - condition: state
+            entity_id: !input action_silent_alarm
+          - condition: state
+            entity_id: !input rfid1
     - choose:
       - conditions:
         - condition: template
