@@ -120,6 +120,7 @@ action:
         sequence:
         - choose:
           default: !input action_silent_alarm
+        - choose:
           default: !input rfid1
     - choose:
       - conditions:
