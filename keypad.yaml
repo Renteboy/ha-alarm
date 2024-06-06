@@ -153,10 +153,10 @@ action:
           value_template: '{{ trigger.payload_json.action == "arm_day_zones" }}'
         - condition: or
           conditions:
-          - condition: state
+          - condition: template
             entity_id: alarm_control_panel.home_alarm
             state: disarmed
-          - condition: state
+          - condition: template
             entity_id: alarm_control_panel.home_alarm
             state: armed_night
         sequence:
