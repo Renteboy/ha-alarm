@@ -3,9 +3,9 @@
 
 blueprint:
     name: Alarm Keypad (Frient/Develco KEPZB-110)
-    description: Adds support for Frient/Develco KEPZB-110 key pad. 
+    description: Alarm and dooropener 
     domain: automation
-    author: crijun
+    author: Renteboy
   
     input:
       z2m_keypad_path:
@@ -24,11 +24,14 @@ blueprint:
             - alarm_control_panel
             multiple: false
       pin:
-        name: Pincode to disarm
+        name: Pincode to disarm Alarm
         description: 'Pin code to disarm the alarm system'
       pin_silent_alarm:
-        name: Silent Alarm Pin
+        name: Pincode to open door
         description: 'Disarms the home alarm system but custom action can be performed'
+      rfid1:
+        name: RFID to open door
+        description: 'RFID to open the door by user #1'
       action_silent_alarm:
         name: Silent Alarm Action
         description: An action to be performed the silent alarm pin is entered instead of the normal pin
@@ -46,6 +49,7 @@ blueprint:
 variables:
   pin_var: !input pin
   pin_silent_alarm_var: !input pin_silent_alarm
+  rfid1: !input rfid1
 
 trigger:
 - platform: mqtt
@@ -116,6 +120,7 @@ action:
         sequence:
         - choose:
           default: !input action_silent_alarm
+          default: !input rfid1
     - choose:
       - conditions:
         - condition: template
