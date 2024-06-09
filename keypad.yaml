@@ -237,7 +237,7 @@ action:
               }}\",\n   \"mode\": \"invalid_code\"\n  }\n}"
         - service: persistent_notification.create 
           data:
-            message: "Someone used an invalid code at Keypad at {{ now().strftime('%a %d/%m %H:%M:%S')}}"
+            message: "Someone used {{trigger.payload_json.action_code}} as an invalid code at Keypad at {{ now().strftime('%a %d/%m %H:%M:%S')}}"
             title: "Invalid Code"
       default: []
   default: []
