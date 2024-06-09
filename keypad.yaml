@@ -49,7 +49,7 @@ blueprint:
 variables:
   pin_var: !input pin
   pin_silent_alarm_var: !input pin_silent_alarm
-  rfid_var: !input_rfid
+  rfid_var: !input rfid
 
 trigger:
 - platform: mqtt
