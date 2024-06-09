@@ -25,6 +25,10 @@ blueprint:
             domain:
             - alarm_control_panel
             multiple: false
+      user:
+       name: Your Name
+       decription: 'Your Name here'
+       default: 'Daddy'
       pin:
         name: Pincode to disarm
         description: 'Pin code to disarm the alarm system'
@@ -52,6 +56,7 @@ variables:
   pin_var: !input pin
   pin_silent_alarm_var: !input pin_silent_alarm
   rfid_var: !input rfid
+  user_var: !input user
 
 trigger:
 - platform: mqtt
