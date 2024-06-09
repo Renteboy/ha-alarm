@@ -202,7 +202,7 @@ action:
           target:
             entity_id: !input control_panel
           data:
-            code: pin_alarm_var
+            code: !input pin_alarm
         - service: mqtt.publish
           data:
             topic: !input z2m_keypad_path_set
