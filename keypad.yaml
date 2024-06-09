@@ -11,9 +11,11 @@ blueprint:
       z2m_keypad_path:
         name: Key pad path
         description: 'Key pad friendly name with zigbee2mqtt/ prefix, e.g.: zigbee2mqtt/EntranceKeyPad'
+        default: zigbee2mqtt/keypad frient
       z2m_keypad_path_set:
         name: Key pad communication path
         description: 'Key pad path with /set appended, e.g. zigbee2mqtt/EntranceKeyPad/set'
+        default: zigbee2mqtt/keypad frient/set
       control_panel:
         name: Control Panel
         description: 'Select alarm control panel, has to be enabled in configuration.yaml first'
