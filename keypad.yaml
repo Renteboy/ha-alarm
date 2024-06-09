@@ -29,8 +29,8 @@ blueprint:
             - alarm_control_panel
             multiple: false
       user1:
-        name: Your Name
-        decription: Your Name here
+        name: Your name
+        description: Your Name here
         default: 'Daddy'
       pin:
         name: User Pincode to disarm
@@ -60,7 +60,7 @@ variables:
   pin_var: !input pin
   pin_garagedoor_var: !input pin_garagedoor
   rfid_var: !input rfid
-  user_var: !input user
+  user_var: !input user1
 
 trigger:
 - platform: mqtt
