@@ -202,11 +202,16 @@ action:
           target:
             entity_id: !input control_panel
           data:
-            code: !input pin_alarm
+            code: pin_alarm_var
         - service: mqtt.publish
           data:
             topic: !input z2m_keypad_path_set
             payload: "{\n \"arm_mode\": \n  {\n    \"mode\": \"disarm\"\n  }\n}"
+        - service: persistent_notification.create
+            metadata: {}
+            data:
+              message: "Valid key by Keypad"
+              title: "Alarm Disabled"
       - conditions:
         - condition: template
           value_template: '{{ trigger.payload_json.action == "emergency" }}'
