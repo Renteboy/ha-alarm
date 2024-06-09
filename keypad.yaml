@@ -16,6 +16,9 @@ blueprint:
         name: Key pad communication path
         description: 'Key pad path with /set appended, e.g. zigbee2mqtt/EntranceKeyPad/set'
         default: 'zigbee2mqtt/keypad frient/set'
+      pin_alarm:
+        name: Alarm Code
+        description: The (private) code to disable the Home Assisant Alarm
       control_panel:
         name: Control Panel
         description: 'Select alarm control panel, has to be enabled in configuration.yaml first'
@@ -30,16 +33,16 @@ blueprint:
        decription: 'Your Name here'
        default: 'Daddy'
       pin:
-        name: Pincode to disarm
-        description: 'Pin code to disarm the alarm system'
-      pin_silent_alarm:
-        name: Silent Alarm Pin
+        name: User Pincode to disarm
+        description: 'The Personal code to disarm the alarm system'
+      pin_garagedoor:
+        name: Open Garage Pin
         description: 'Disarms the home alarm system but custom action can be performed'
       rfid:
         name: RFID
         description: something
-      action_silent_alarm:
-        name: Silent Alarm Action
+      action_garagedoor:
+        name: Open Garage Action
         description: An action to be performed the silent alarm pin is entered instead of the normal pin
         default: []
         selector:
@@ -53,8 +56,9 @@ blueprint:
 
   
 variables:
+  pin_alarm_var: !input pin_alarm
   pin_var: !input pin
-  pin_silent_alarm_var: !input pin_silent_alarm
+  pin_garagedoor_var: !input pin_garagedoor
   rfid_var: !input rfid
   user_var: !input user
 
@@ -125,12 +129,12 @@ action:
           - condition: or
             conditions:
             - condition: template
-              value_template: '{{ trigger.payload_json.action_transaction != null and trigger.payload_json.action_code == pin_silent_alarm_var }}'
+              value_template: '{{ trigger.payload_json.action_transaction != null and trigger.payload_json.action_code == pin_garagedoor_var }}'
             - condition: template
               value_template: '{{ trigger.payload_json.action_transaction != null and trigger.payload_json.action_code == rfid_var }}'
         sequence:
         - choose:
-          default: !input action_silent_alarm
+          default: !input action_garagedoor
     - choose:
       - conditions:
         - condition: template
@@ -192,13 +196,13 @@ action:
             code: !input pin
       - conditions:
         - condition: template
-          value_template: '{{ ( trigger.payload_json.action_code == pin_var or trigger.payload_json.action_code == pin_silent_alarm_var ) and trigger.payload_json.action == "disarm" }}'
+          value_template: '{{ ( trigger.payload_json.action_code == pin_var or trigger.payload_json.action_code == pin_garagedoor_var ) and trigger.payload_json.action == "disarm" }}'
         sequence:
         - service: alarm_control_panel.alarm_disarm
           target:
             entity_id: !input control_panel
           data:
-            code: !input pin
+            code: pin_alarm_var
         - service: mqtt.publish
           data:
             topic: !input z2m_keypad_path_set
