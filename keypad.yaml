@@ -2,8 +2,8 @@
 # https://community.home-assistant.io/t/zigbee2mqtt-sync-keypad-and-with-alarm-control-panel-states/345311
 
 blueprint:
-    name: Alarm Keypad (Frient/Develco KEPZB-110)
-    description: Adds support for Frient/Develco KEPZB-110 key pad. 
+    name: Alarm + Garage Door Keypad (Main Blueprint)
+    description: Base to set & manage your Alarm codes + access code for 1st user (build for Frient/Develco KEPZB-110 keypad). 
     domain: automation
     author: Renteboy
   
@@ -33,16 +33,16 @@ blueprint:
         description: Your Name here
         default: 'Daddy'
       pin:
-        name: User Pincode to disarm
+        name: Personal Pincode to Disarm Alarm 
         description: 'The Personal code to disarm the alarm system'
       pin_garagedoor:
         name: Open Garage Pin
-        description: 'Disarms the home alarm system but custom action can be performed'
+        description: 'Pin to trigger the Garage Door Action'
       rfid:
         name: RFID
-        description: something
+        description: 'RFID to trigger the Garage Door Action'
       action_garagedoor:
-        name: Open Garage Action
+        name: Garage Door Action
         description: An action to be performed the silent alarm pin is entered instead of the normal pin
         default: []
         selector:
