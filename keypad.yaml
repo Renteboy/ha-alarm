@@ -135,6 +135,10 @@ action:
         sequence:
         - choose:
           default: !input action_garagedoor
+        - service: persistent_notification.create 
+          data:
+            message: "{{user_var}} used a valid key at Keypad at {{ now().strftime('%a %d/%m %H:%M:%S')}}"
+            title: "Garage Door Opened"
     - choose:
       - conditions:
         - condition: template
@@ -196,7 +200,7 @@ action:
             code: !input pin_alarm
       - conditions:
         - condition: template
-          value_template: '{{ ( trigger.payload_json.action_code == pin_var or trigger.payload_json.action_code == pin_garagedoor_var ) and trigger.payload_json.action == "disarm" }}'
+          value_template: '{{ ( trigger.payload_json.action_code == pin_var or trigger.payload_json.action_code == pin_alarm_var ) and trigger.payload_json.action == "disarm" }}'
         sequence:
         - service: alarm_control_panel.alarm_disarm
           target:
