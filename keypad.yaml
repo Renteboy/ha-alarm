@@ -155,7 +155,7 @@ action:
           target:
             entity_id: !input control_panel
           data:
-            code: !input pin
+            code: !input pin_alarm
         - service: mqtt.publish
           data:
             topic: !input z2m_keypad_path_set
@@ -176,7 +176,7 @@ action:
           target:
             entity_id: !input control_panel
           data:
-            code: !input pin
+            code: !input pin_alarm
       - conditions:
         - condition: template
           value_template: '{{ trigger.payload_json.action == "arm_night_zones" }}'
@@ -193,7 +193,7 @@ action:
           target:
             entity_id: !input control_panel
           data:
-            code: !input pin
+            code: !input pin_alarm
       - conditions:
         - condition: template
           value_template: '{{ ( trigger.payload_json.action_code == pin_var or trigger.payload_json.action_code == pin_garagedoor_var ) and trigger.payload_json.action == "disarm" }}'
@@ -202,7 +202,7 @@ action:
           target:
             entity_id: !input control_panel
           data:
-            code: pin_alarm_var
+            code: !input pin_alarm
         - service: mqtt.publish
           data:
             topic: !input z2m_keypad_path_set
