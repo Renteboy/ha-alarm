@@ -29,9 +29,9 @@ blueprint:
             - alarm_control_panel
             multiple: false
       user:
-       name: Your Name
-       decription: 'Your Name here'
-       default: 'Daddy'
+        name: Your Name
+        decription: 'Your Name here'
+        default: 'Daddy'
       pin:
         name: User Pincode to disarm
         description: 'The Personal code to disarm the alarm system'
