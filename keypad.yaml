@@ -29,6 +29,9 @@ blueprint:
       pin_silent_alarm:
         name: Silent Alarm Pin
         description: 'Disarms the home alarm system but custom action can be performed'
+      rfid:
+        name: RFID
+        description: something
       action_silent_alarm:
         name: Silent Alarm Action
         description: An action to be performed the silent alarm pin is entered instead of the normal pin
@@ -46,6 +49,7 @@ blueprint:
 variables:
   pin_var: !input pin
   pin_silent_alarm_var: !input pin_silent_alarm
+  rfid_var: !input_rfid
 
 trigger:
 - platform: mqtt
