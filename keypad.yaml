@@ -28,8 +28,17 @@ blueprint:
             domain:
             - alarm_control_panel
             multiple: false
+      check_user_helper:
+        name: Other Users Helper
+        description: 'If more users are configured, this helper will be used to check for failed code inputs'
+        default: []
+        selector:
+          entity:
+            domain:
+            - input_boolean
+            multiple: false
       user1:
-        name: Your name
+        name: Your Name
         description: Your Name here
         default: 'Daddy'
       pin:
