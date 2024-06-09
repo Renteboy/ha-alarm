@@ -5,7 +5,7 @@ blueprint:
     name: Alarm Keypad (Frient/Develco KEPZB-110)
     description: Adds support for Frient/Develco KEPZB-110 key pad. 
     domain: automation
-    author: crijun
+    author: Renteboy
   
     input:
       z2m_keypad_path:
