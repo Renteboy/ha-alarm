@@ -115,10 +115,14 @@ action:
             topic: !input z2m_keypad_path_set
             payload: "{\n \"arm_mode\": \n  {\n    \"transaction\": \"{{ trigger.payload_json.action_transaction
               }}\",\n    \"mode\": \"{{ trigger.payload_json.action }}\"\n  }\n}"
-    - choose:
+  - choose:
       - conditions:
-        - condition: template
-          value_template: '{{ trigger.payload_json.action_transaction != null and trigger.payload_json.action_code == pin_silent_alarm_var }}'
+          - condition: or
+            conditions:
+              - condition: template
+                value_template: '{{ trigger.payload_json.action_transaction != null and trigger.payload_json.action_code == pin_silent_alarm_var }}'
+              - condition: template
+                value_template: '{{ trigger.payload_json.action_transaction != null and trigger.payload_json.action_code == rfid_var }}'
         sequence:
         - choose:
           default: !input action_silent_alarm
