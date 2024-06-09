@@ -208,7 +208,6 @@ action:
             topic: !input z2m_keypad_path_set
             payload: "{\n \"arm_mode\": \n  {\n    \"mode\": \"disarm\"\n  }\n}"
         - service: persistent_notification.create
-            metadata: {}
             data:
               message: "Valid key by Keypad"
               title: "Alarm Disabled"
