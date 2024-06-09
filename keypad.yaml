@@ -28,9 +28,9 @@ blueprint:
             domain:
             - alarm_control_panel
             multiple: false
-      user:
+      user1:
         name: Your Name
-        decription: 'Your Name here'
+        decription: Your Name here
         default: 'Daddy'
       pin:
         name: User Pincode to disarm
