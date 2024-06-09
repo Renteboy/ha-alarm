@@ -209,7 +209,7 @@ action:
             payload: "{\n \"arm_mode\": \n  {\n    \"mode\": \"disarm\"\n  }\n}"
         - service: persistent_notification.create 
           data:
-            message: {{user_var}} used a valid key at Keypad at {{ now().strftime('%a %d/%m %H:%M:%S')}}
+            message: "{{user_var}} used a valid key at Keypad at {{ now().strftime('%a %d/%m %H:%M:%S')}}"
             title: "Alarm Disabled"
       - conditions:
         - condition: template
