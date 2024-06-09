@@ -235,6 +235,10 @@ action:
             topic: !input z2m_keypad_path_set
             payload: "{\n \"arm_mode\": \n  {\n   \"transaction\": \"{{ trigger.payload_json.action_transaction
               }}\",\n   \"mode\": \"invalid_code\"\n  }\n}"
+        - service: persistent_notification.create 
+          data:
+            message: "Someone used an invalid code at Keypad at {{ now().strftime('%a %d/%m %H:%M:%S')}}"
+            title: "Invalid Code"
       default: []
   default: []
 mode: parallel
